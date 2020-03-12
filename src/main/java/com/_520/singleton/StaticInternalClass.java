@@ -3,6 +3,7 @@ package com._520.singleton;
 /**
  * 静态内部类
  * 加载外部类时不会加载内部类，这样可以实现懒加载
+ * 线程安全
  */
 public class StaticInternalClass {
 
@@ -17,10 +18,13 @@ public class StaticInternalClass {
     }
 
     public static void main(String[] args) {
+
         for (int i = 0; i < 100; i++) {
             new Thread(() -> {
-                System.out.println(getInstence());
+                StaticInternalClass instence = getInstence();
+                System.out.println(instence.hashCode());
             }).start();
         }
+
     }
 }

@@ -1,7 +1,5 @@
 package com._520.singleton;
 
-import javax.swing.*;
-
 /**
  *   饿汉式
  *  类加载到内存后，就实例化一个单例
@@ -24,8 +22,10 @@ public class HungrySingleton {
 
         for (int i = 0; i < 100; i++) {
             new Thread(() -> {
-                System.out.println(getInstence());
+                HungrySingleton instence = getInstence();
+                System.out.println(instence.hashCode());
             }).start();
         }
+
     }
 }

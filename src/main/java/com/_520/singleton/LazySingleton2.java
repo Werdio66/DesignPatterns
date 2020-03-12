@@ -4,15 +4,16 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 懒汉式
- * 虽然达到了按需初始化的目的，但却带来线程不安全的问题
+ * 可以按需初始化，但是线程不安全
+ * 可以通过synchronized解决，效率下降
  */
-public class LazySingleton1 {
+public class LazySingleton2 {
 
-    private static LazySingleton1 INSTENCE = null;
+    private static LazySingleton2 INSTENCE = null;
 
-    private LazySingleton1(){}
+    private LazySingleton2(){}
 
-    private static LazySingleton1 getInstence(){
+    private synchronized static LazySingleton2 getInstence(){
 
         if (INSTENCE == null){
 
@@ -21,16 +22,18 @@ public class LazySingleton1 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            INSTENCE = new LazySingleton1();
+            INSTENCE = new LazySingleton2();
         }
 
         return INSTENCE;
     }
 
     public static void main(String[] args) {
+
         for (int i = 0; i < 100; i++) {
             new Thread(() -> {
-                System.out.println(getInstence());
+                LazySingleton2 instence = getInstence();
+                System.out.println(instence.hashCode());
             }).start();
         }
 

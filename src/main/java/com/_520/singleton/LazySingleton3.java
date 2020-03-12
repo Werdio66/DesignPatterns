@@ -4,8 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 懒汉式
- * 虽然达到了按需初始化的目的，但却带来线程不安全的问题
- * 可以通过synchronized解决，但也带来效率下降
+ * 减少同步代码块，线程不安全
  */
 public class LazySingleton3 {
 
@@ -18,7 +17,7 @@ public class LazySingleton3 {
         if (INSTENCE == null){
             // 可能会有多个线程在这里等着
             try {
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -32,9 +31,11 @@ public class LazySingleton3 {
     }
 
     public static void main(String[] args) {
+
         for (int i = 0; i < 100; i++) {
             new Thread(() -> {
-                System.out.println(getInstence());
+                LazySingleton3 instence = getInstence();
+                System.out.println(instence.hashCode());
             }).start();
         }
 
