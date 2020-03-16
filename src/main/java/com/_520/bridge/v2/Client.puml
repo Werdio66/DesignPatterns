@@ -1,0 +1,19 @@
+@startuml
+
+abstract class Phone
+class OnRight
+class Flat
+
+interface Brand
+class HuaWei
+class XiaoMi
+
+Phone o-- Brand
+
+Phone <|-- OnRight
+Phone <|-- Flat
+
+Brand <|.. HuaWei
+Brand <|.. XiaoMi
+
+@enduml
