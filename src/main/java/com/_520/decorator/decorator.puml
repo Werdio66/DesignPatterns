@@ -1,0 +1,30 @@
+@startuml
+
+' 装饰者模式：用装饰器包裹被装饰者
+' new DataOutPutStream(new FileOutPutStream())
+
+abstract class Drick{
+    getCost() : float
+}
+' 被装饰者，单品咖啡
+abstract class Coffee
+
+Drick <|-- Coffee
+
+class LongBlack
+class Espresso
+
+Coffee <|-- LongBlack
+Coffee <|-- Espresso
+
+' 装饰类：调味品
+class Decorator {
+    ' 聚合被装饰的对象
+    drick : Drick
+}
+
+class Chocolate
+
+Decorator <|-- Chocolate
+Drick <|-- Decorator
+@enduml
