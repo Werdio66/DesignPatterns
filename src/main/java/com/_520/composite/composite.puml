@@ -1,0 +1,38 @@
+@startuml
+
+' 组合模式
+'
+abstract class OrgenizitionComponent {
+    private String name
+    private String des
+    add() : void
+    remove() : void
+    print() : void
+}
+
+class School {
+    ' 组合学院
+    List<OrgenizitionComponent> list
+    add() : void
+    remove() : void
+    print() : void
+}
+
+class college {
+    ' 组合专业
+    List<OrgenizitionComponent> list
+    add() : void
+    remove() : void
+    print() : void
+}
+
+' 叶子结点，没有添加和删除
+class prefession {
+    print() : void
+}
+
+OrgenizitionComponent <|-- college
+OrgenizitionComponent <|-- prefession
+OrgenizitionComponent <|-- School
+
+@enduml
