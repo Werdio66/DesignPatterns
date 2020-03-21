@@ -1,0 +1,19 @@
+@startuml
+
+interface UserService{
+    update() : void
+}
+
+class UserServiceImpl{
+    update() : void
+}
+class UserServiceProxy{
+    UserService userService
+    update()        :          void
+    beforeAdvice()  :     void
+    afterAdvice()   :       void
+}
+
+UserService <|.. UserServiceImpl
+UserService <|.. UserServiceProxy
+@enduml
