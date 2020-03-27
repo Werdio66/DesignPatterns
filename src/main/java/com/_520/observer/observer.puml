@@ -1,0 +1,36 @@
+@startuml
+
+' 观察者模式
+
+' 被观察者
+interface Subject{
+    registerObserver(Observer observer) : void
+    removeObserver(Observer observer) : void
+    notifyObservers() : void
+}
+
+' 具体的观察者，气象台
+class WeatherData{
+    ' 操控所有的观察者
+    observers : List<Observer>
+    ' 设置最新的天气信息
+    setData(int temperature, int pressure, int humidity) : void
+}
+
+Subject <|.. WeatherData
+
+' 观察者，天气预报的接入方
+abstract class Observer{
+    ' 更新天气信息
+    update(int temperature, int pressure, int humidity) : void
+    ' 显示天气情况
+    display() : void
+}
+
+' 具体的接入方
+class Baidu
+class QQ
+
+Observer <|-- Baidu
+Observer <|-- QQ
+@enduml
