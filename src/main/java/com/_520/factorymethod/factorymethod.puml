@@ -1,0 +1,31 @@
+@startuml
+
+class Client
+
+Client --> Log
+Client --> LogFactory
+
+interface Log {
+    writeLog : void
+}
+class FileLog {
+    writeLog : void
+}
+class DataBaseLog {
+    writeLog : void
+}
+Log <|.. FileLog
+Log <|.. DataBaseLog
+
+interface LogFactory {
+    createLog : Log
+}
+class DataBaseLogFactory {
+    createLog : Log
+}
+class FileLogFactory {
+    createLog : Log
+}
+LogFactory <|.. FileLogFactory
+LogFactory <|.. DataBaseLogFactory
+@enduml
