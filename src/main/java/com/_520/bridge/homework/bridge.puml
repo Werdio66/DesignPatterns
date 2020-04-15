@@ -1,0 +1,37 @@
+@startuml
+abstract class OsVersion{
+    #videoFile : VideoFile
+    +OsVersion(VideoFile videoFile) : void
+    #play(String fileName) : void
+}
+note left : 操作系统类型
+class WindowsVersion {
+    +WindowsVersion(VideoFile videoFile) : void
+    #play(String fileName) : void
+}
+note bottom : 具体的 Windows 操作系统
+class LinuxVersion {
+}
+class UnixVersion {
+}
+
+OsVersion <|-- WindowsVersion
+OsVersion <|-- LinuxVersion
+OsVersion <|-- UnixVersion
+OsVersion o-- VideoFile
+
+interface VideoFile{
+    +decode(String osType, String fileName) : void
+}
+note top : 视频文件
+class AVIFile{
+    +decode(String osType, String fileName) : void
+}
+note bottom : 具体的 AVI 格式的视频文件
+class MPEGFile
+class WMVFile
+
+VideoFile <|.. AVIFile
+VideoFile <|.. MPEGFile
+VideoFile <|.. WMVFile
+@enduml
