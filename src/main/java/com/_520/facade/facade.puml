@@ -1,0 +1,29 @@
+@startuml
+note " 桥接模式 " as I
+class FileReader{
+    +read(String fileNameSrc) : String
+}
+note bottom : 读取文件内容
+class FileWriter{
+    +write(String encryptText, String fileName) : void
+}
+note bottom : 将加密后的文件保存
+class CipherMachine{
+    +encrypt(String plainText) : String
+}
+note bottom : 对文件内容进行加密
+class EncryptFacade{
+    -fileReader : FileReader
+    -fileWriter : FileWriter
+    -cipherMachine : CipherMachine
+    +fileEncrypt(String fileNameSrc, String fileNameDesc) : void
+}
+note right : 外观类：负责统一处理 读取文件，\n加密，保存文件 操作
+EncryptFacade *-- FileReader
+EncryptFacade *-- FileWriter
+EncryptFacade *-- CipherMachine
+
+class Client
+
+Client --> EncryptFacade
+@enduml
