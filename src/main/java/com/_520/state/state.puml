@@ -1,0 +1,38 @@
+@startuml
+
+abstract class AccountState{
+    #account : Account
+    #stateCheck() : void
+    #deposit(double amount): void
+    #withdraw(double amount): void
+}
+
+class GreenState{
+    #deposit(double amount): void
+    #withdraw(double amount): void
+}
+class YellowState{
+    #deposit(double amount): void
+    #withdraw(double amount): void
+}
+class RedState{
+    #deposit(double amount): void
+    #withdraw(double amount): void
+}
+
+class Account {
+    -accountState : AccountState
+    +balance : double
+    -name : String
+    +deposit(double amount) : void
+    +withdraw(double amount) : void
+}
+
+AccountState <|-- GreenState
+AccountState <|-- YellowState
+AccountState <|-- RedState
+AccountState o-- Account
+Account o-- AccountState
+
+Client --> Account
+@enduml
